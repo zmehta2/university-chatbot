@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * This class is used to handle the business logic for the Chatbot model.
- * 
+ * [Futureuse] This class is not used in the current implementation.
  * @author zinal
  *
  */

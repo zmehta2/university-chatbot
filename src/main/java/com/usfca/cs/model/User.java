@@ -5,12 +5,18 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.Data;
 
+/**
+ * User is the model class for user accounts.
+ * 
+ * @Author Zinal
+ *
+ */
 @Data
 @Document(collection = "users")
 public class User {
-    @Id
-    private String id;
-    private String username;
-    private String password;
-    private String role;
+	@Id
+	private String id;
+	private String username;
+	private String password;
+	private String role;
 }

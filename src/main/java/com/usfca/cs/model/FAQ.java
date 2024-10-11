@@ -5,6 +5,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.Data;
 
+/**
+ * FAQ is the model class for frequently asked questions.
+ * 
+ * @Author Zinal
+ *
+ */
 @Data
 @Document(collection = "faqs")
 public class FAQ {

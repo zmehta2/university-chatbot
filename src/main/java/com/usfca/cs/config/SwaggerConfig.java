@@ -9,23 +9,19 @@ import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 
 /**
+ * SwaggerConfig is the configuration class for Swagger.
  * 
- * 
- * @author zinal
- *
+ * @Author zinal
  */
 @Configuration
 public class SwaggerConfig {
 
-    @Bean
-    public OpenAPI usersMicroserviceOpenAPI() {
-        return new OpenAPI()
-                .info(new Info().title("University Chatbot API")
-                        .description("API for University FAQ Chatbot")
-                        .version("1.0"))
-                .components(new Components()
-                        .addSecuritySchemes("basicAuth", new SecurityScheme()
-                                .type(SecurityScheme.Type.HTTP)
-                                .scheme("basic")));
-    }
+	@Bean
+	public OpenAPI usersMicroserviceOpenAPI() {
+		return new OpenAPI()
+				.info(new Info().title("University Chatbot API").description("API for University FAQ Chatbot")
+						.version("1.0"))
+				.components(new Components().addSecuritySchemes("basicAuth",
+						new SecurityScheme().type(SecurityScheme.Type.HTTP).scheme("basic")));
+	}
 }

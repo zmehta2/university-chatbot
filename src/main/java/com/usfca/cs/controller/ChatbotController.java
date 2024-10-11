@@ -9,6 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.usfca.cs.service.ChatbotService;
 
+/**
+ * This class is used to handle the chatbot requests.
+ * [Future Use]
+ * @author zinal
+ *
+ */
 @RestController
 @RequestMapping("/api/chat")
 public class ChatbotController {
@@ -16,11 +22,11 @@ public class ChatbotController {
 	@Autowired
 	private ChatbotService chatbotService;
 
-    @PostMapping
-    public ResponseEntity<String> chat(@RequestBody String message) {
+	@PostMapping
+	public ResponseEntity<String> chat(@RequestBody String message) {
 //        String response = chatbotService.processMessage(message);
 //        return ResponseEntity.ok(response);
-    	return ResponseEntity.ok("response");
-    }
-	
+		return ResponseEntity.ok("response");
+	}
+
 }

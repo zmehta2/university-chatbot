@@ -12,6 +12,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+/**
+ * This class is used to configure the security for the application.
+ * 
+ * @author zinal
+ *
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {

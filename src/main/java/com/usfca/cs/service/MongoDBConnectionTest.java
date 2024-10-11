@@ -5,6 +5,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Component;
 
+/**
+ * MongoDBConnectionTest is a service class to test the MongoDB connection.
+ * 
+ * @Author Zinal
+ *
+ */
 @Component
 public class MongoDBConnectionTest implements CommandLineRunner {
 

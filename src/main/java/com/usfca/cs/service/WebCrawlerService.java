@@ -1,21 +1,32 @@
 package com.usfca.cs.service;
 
-import com.usfca.cs.model.FAQ;
-import com.usfca.cs.repository.FAQRepository;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
-import java.io.IOException;
-import java.util.*;
-import java.util.concurrent.TimeUnit;
+
+import com.usfca.cs.model.FAQ;
+import com.usfca.cs.repository.FAQRepository;
+
 import crawlercommons.robots.BaseRobotRules;
 import crawlercommons.robots.SimpleRobotRules;
 import crawlercommons.robots.SimpleRobotRulesParser;
 
+/**
+ * This class is used to crawl the university website and update the FAQ data.
+ * 
+ * @author zinal
+ *
+ */
 @Service
 public class WebCrawlerService {
 
@@ -26,9 +37,6 @@ public class WebCrawlerService {
 	private final FAQRepository faqRepository;
 	private final Set<String> visitedUrls = new HashSet<>();
 	private BaseRobotRules robotRules;
-	
-	@Autowired
-	private MongoTemplate mongoTemplate;
 
 	@Autowired
 	public WebCrawlerService(FAQRepository faqRepository) {
@@ -36,6 +44,7 @@ public class WebCrawlerService {
 		initRobotRules();
 	}
 
+	// Initialize the robot rules by fetching and parsing robots.txt
 	private void initRobotRules() {
 		try {
 			String robotsTxtUrl = BASE_URL + "/robots.txt";
@@ -49,6 +58,7 @@ public class WebCrawlerService {
 		}
 	}
 
+	// Crawl the university website and update the FAQs in MongoDB
 	public void crawlAndUpdateFAQs() {
 		try {
 			List<FAQ> faqs = new ArrayList<>();
@@ -68,6 +78,7 @@ public class WebCrawlerService {
 		}
 	}
 
+	// Recursively crawl the page and its subpages
 	private void crawlPage(String url, List<FAQ> faqs) throws IOException, InterruptedException {
 		if (!robotRules.isAllowed(url)) {
 			System.out.println("URL not allowed by robots.txt: " + url);
@@ -95,6 +106,7 @@ public class WebCrawlerService {
 		}
 	}
 
+	// Extract the FAQ content from the page
 	private void extractContent(Document doc, List<FAQ> faqs) {
 		Elements sections = doc.select("section");
 		for (Element section : sections) {

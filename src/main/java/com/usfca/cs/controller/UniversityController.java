@@ -21,12 +21,19 @@ import com.usfca.cs.service.WebCrawlerService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+/**
+ * This class is used to handle the admin operations.
+ * 
+ * @Author zinal
+ *
+ */
 @RestController
 @RequestMapping("/api/university")
 @PreAuthorize("hasRole('ADMIN')")
 @Tag(name = "Admin Controller", description = "Endpoints for admin operations")
 @SecurityRequirement(name = "basicAuth")
 public class UniversityController {
+
 	private final FAQService faqService;
 	private final WebCrawlerService crawlerService;
 
