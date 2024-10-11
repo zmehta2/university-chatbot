@@ -72,9 +72,3 @@ To meet the original project requirements, future development will focus on:
 3. Enhancing the admin interface for comprehensive knowledge base management
 4. Creating a user-friendly chat interface for students
 5. Integrating OpenAI API for natural language processing if feasible within timeline
-
-## Contributing
-Contributions to expand the project towards its full requirements are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
-
-## License
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
