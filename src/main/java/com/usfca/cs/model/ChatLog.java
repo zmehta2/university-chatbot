@@ -19,7 +19,13 @@ public class ChatLog {
 	@Id
 	private String id;
 	private String userId;
-	private String message;
-	private String response;
+	private String question;
+	private String answer;
+	private boolean answerFound;
+	private String category;
 	private LocalDateTime timestamp;
+	private String source; // FAQ or Crawled
+	private boolean helpful; // User feedback
+	private String userFeedback; // Additional feedback
+
 }

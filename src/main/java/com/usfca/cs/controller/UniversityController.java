@@ -1,10 +1,11 @@
 package com.usfca.cs.controller;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,10 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.usfca.cs.model.FAQ;
-import com.usfca.cs.service.FAQService;
+import com.usfca.cs.model.FAQService;
 import com.usfca.cs.service.WebCrawlerService;
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -29,7 +31,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
  */
 @RestController
 @RequestMapping("/api/university")
-@PreAuthorize("hasRole('ADMIN')")
+//@PreAuthorize("hasRole('ADMIN')")
+@CrossOrigin(origins = "http://localhost:3000")
 @Tag(name = "Admin Controller", description = "Endpoints for admin operations")
 @SecurityRequirement(name = "basicAuth")
 public class UniversityController {
@@ -77,6 +80,27 @@ public class UniversityController {
 	public ResponseEntity<Void> deleteFAQ(@PathVariable String id) {
 		faqService.deleteFAQ(id);
 		return ResponseEntity.ok().build();
+	}
+
+	// Quick Reply Endpoint - provides common FAQ categories for quick selection
+	@GetMapping("/quick-replies")
+	public ResponseEntity<List<String>> getQuickReplies() {
+		List<String> quickReplies = Arrays.asList("Admission Requirements", "Courses", "Scholarships", "Campus Facilities",
+				"Contact Information");
+		return ResponseEntity.ok(quickReplies);
+	}
+
+	// Search FAQs by keyword
+	@GetMapping("/faqs/search")
+	public ResponseEntity<List<FAQ>> searchFAQs(@RequestParam String keyword) {
+		List<FAQ> results = faqService.searchFAQsByKeyword(keyword);
+		return ResponseEntity.ok(results);
+	}
+	
+	@GetMapping("/faqs/category/{category}")
+	public ResponseEntity<List<FAQ>> getFAQsByCategory(@PathVariable String category) {
+	    List<FAQ> faqs = faqService.getFAQsByCategory(category);
+	    return ResponseEntity.ok(faqs);
 	}
 
 }

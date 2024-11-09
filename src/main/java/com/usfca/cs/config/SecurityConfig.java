@@ -21,13 +21,19 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
+	
 	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests().antMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
-				.antMatchers("/api/**").hasRole("ADMIN").anyRequest().authenticated().and().httpBasic();
-		return http.build();
-	}
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+            .csrf().disable()
+            .cors().and()
+            .antMatcher("/swagger-ui/**").antMatcher("/v3/api-docs/**")
+            .authorizeHttpRequests((authorize) -> authorize
+            		.antMatchers("/api/**").permitAll()
+                .anyRequest().authenticated()
+            );
+        return http.build();
+    }
 
 	@Bean
 	public UserDetailsService userDetailsService() {
