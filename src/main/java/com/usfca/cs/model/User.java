@@ -14,9 +14,12 @@ import lombok.Data;
 @Data
 @Document(collection = "users")
 public class User {
-	@Id
-	private String id;
-	private String username;
-	private String password;
-	private String role;
-}
+
+		@Id
+		private String id;
+		private String username;
+		private String password;
+		private String email;
+		private String role; // ADMIN, USER
+		private boolean active;
+	}
